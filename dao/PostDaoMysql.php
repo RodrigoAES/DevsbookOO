@@ -24,6 +24,7 @@ class PostDaoMysql implements PostDAO {
     }
 
     public function getUserFeed($id_user) {
+        $postList = [];
         $sql = $this->pdo->prepare("SELECT * FROM posts WHERE id_user = :id_user ORDER BY created_at DESC");
         $sql->bindValue(':id_user', $id_user);
         $sql->execute();
@@ -36,6 +37,7 @@ class PostDaoMysql implements PostDAO {
     }
     
     public function getHomeFeed($id_user) {
+        $postList = [];
         // 1. lista dos usuarios que eu sigo 
         $urDAO = new UserRelationDaoMysql($this->pdo);
         $userList = $urDAO->getFollowing($id_user);

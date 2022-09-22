@@ -31,18 +31,20 @@ class UserDaoMysql implements UserDAO {
             $user->followers = $urDAO->getFollowers($user->id);
             foreach($user->followers as $key => $follower_id) {
                 $newUser = $this->findById($follower_id);
-                $user->follower[$key] = $newUser;
+                $user->followers[$key] = $newUser;
             }
 
             $user->following = $urDAO->getFollowing($user->id);
             foreach($user->following as $key => $followed_id) {
                 $newUser = $this->findById($followed_id);
                 $user->following[$key] = $newUser;
+                
             }
+            
             //photos
             $user->photos = $postDAO->getPhotosFrom($user->id);
         }
-
+        
         return $user;
     }
 
