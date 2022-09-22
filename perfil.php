@@ -148,12 +148,12 @@ require 'partials/menu.php' ;
                 </div>
                 <div class="box-body row m-20">
                     <?php if($user->photos > 0): ?>
-                        <?php foreach($user->photos as $photo): ?>
+                        <?php foreach($user->photos as $key => $photo): ?>
                             <div class="user-photo-item">
-                                <a href="#modal-1" rel="modal:open">
+                                <a href="#modal-<?=$key;?>" rel="modal:open">
                                     <img src="<?=$base;?>/media/uploads/<?=$photo->body;?>" />
                                 </a>
-                                <div id="modal-1" style="display:none">
+                                <div id="modal-<?=$key;?>" style="display:none">
                                     <img src="<?=$base;?>/media/uploads/<?=$photo->body;?>" />
                                 </div>
                             </div>

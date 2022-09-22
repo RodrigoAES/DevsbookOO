@@ -390,6 +390,12 @@ header .head-side {
 .full-user-photos .user-photo-item {
     margin:0;
 }
+.config-form {
+    display: none;
+}
+.config-form label{
+    display:none
+}
 
 @media (max-width: 992px) {
     header .head-side-right {

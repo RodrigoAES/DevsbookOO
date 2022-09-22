@@ -97,6 +97,38 @@ class UserDaoMysql implements UserDAO {
         }
     }
 
+    public function findByName($name) {
+        $users = [];
+
+        if(!empty($name)){
+            $sql = $this->pdo->prepare("SELECT * FROM users
+                                        WHERE name LIKE :name
+                                        ORDER BY
+                                        CASE
+                                            WHEN name LIKE :caseOne THEN 1
+                                            WHEN name LIKE :caseTwo THEN 2
+                                            WHEN name LIKE :caseThree THEN 4
+                                            ELSE 3     
+                                        END ");
+                                        
+            $sql->bindValue(':name', "%$name%");
+            $sql->bindValue(':caseOne', $name);
+            $sql->bindValue(':caseTwo', "$name%");
+            $sql->bindValue(':caseThree', "%$name");
+            $sql->execute();
+
+            if($sql->rowCount() > 0) {
+                $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach($data as $result) {
+                    $users[] = $this->generateUser($result);
+                }
+            }
+        }  
+
+        return $users;
+    }
+
     public function update(User $user) {
         $sql = $this->pdo->prepare('UPDATE users SET 
             email = :email,
