@@ -1,5 +1,7 @@
 <?php
-require_once 'models/user.php';
+require_once 'models/User.php';
+require_once 'dao/UserRelationDaoMysql.php';
+require_once 'dao/PostDaoMysql.php';
 
 class UserDaoMysql implements UserDAO {
     private $pdo;
@@ -9,7 +11,7 @@ class UserDaoMysql implements UserDAO {
 
     }
 
-    private function generateUser($data) {
+    private function generateUser($data, $full = false) {
         $user = new User;
         $user->id = $data['id'] ?? 0;
         $user->email = $data['email'] ?? '';
@@ -21,6 +23,25 @@ class UserDaoMysql implements UserDAO {
         $user->avatar = $data['avatar'] ?? '';
         $user->cover = $data['cover'] ?? '';
         $user->token = $data['token'] ?? '';
+
+        if($full) {
+            $urDAO = new UserRelationDaoMysql($this->pdo);
+            $postDAO = new PostDaoMysql($this->pdo);
+
+            $user->followers = $urDAO->getFollowers($user->id);
+            foreach($user->followers as $key => $follower_id) {
+                $newUser = $this->findById($follower_id);
+                $user->follower[$key] = $newUser;
+            }
+
+            $user->following = $urDAO->getFollowing($user->id);
+            foreach($user->following as $key => $followed_id) {
+                $newUser = $this->findById($followed_id);
+                $user->following[$key] = $newUser;
+            }
+            //photos
+            $user->photos = $postDAO->getPhotosFrom($user->id);
+        }
 
         return $user;
     }
@@ -54,6 +75,23 @@ class UserDaoMysql implements UserDAO {
 
                 return $user;
             }
+        }
+    }
+
+    public function findById($id, $full = false) {
+        if(!empty($id)){
+            $sql = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
+            $sql->bindValue(':id', $id);
+            $sql->execute();
+
+            if($sql->rowCount() > 0) {
+                $data = $sql->fetch(PDO::FETCH_ASSOC);
+                $user = $this->generateUser($data, $full);
+
+                return $user;
+            }
+
+            return false;
         }
     }
 
