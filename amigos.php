@@ -24,9 +24,7 @@ if(!$user){
 $dateFrom = new DateTime($user->birthdate);
 $dateTo = new DateTime('today');
 $user->ageYears = $dateFrom->diff($dateTo)->y; 
-
 //3 verificar se eu sigo este usuario
-
 
 require 'partials/header.php';
 require 'partials/menu.php' ;
@@ -85,7 +83,7 @@ require 'partials/menu.php' ;
                     <div class="tab-content">
 
                         <div class="tab-body" data-item="followers">
-                            
+                    
                             <div class="full-friend-list">
                                 <?php if(count($user->followers) > 0): ?>
                                     <?php foreach($user->followers as $follower):?>
@@ -103,7 +101,6 @@ require 'partials/menu.php' ;
                                 <?php endif; ?>
                             </div>
                         <div class="tab-body" data-item="following">
-                        
                             <div class="full-friend-list">
                                 <?php if(count($user->following) > 0): ?>
                                     <?php foreach($user->following as $followed):?>
@@ -131,9 +128,6 @@ require 'partials/menu.php' ;
         </div>
 
     </div>
-
-
-     
-
+ 
 </section>
 <?php require 'partials/footer.php' ?>

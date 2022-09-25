@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23-Set-2022 às 17:45
+-- Tempo de geração: 25-Set-2022 às 02:15
 -- Versão do servidor: 10.9.2-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -35,6 +35,17 @@ CREATE TABLE `postcomments` (
   `body` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `postcomments`
+--
+
+INSERT INTO `postcomments` (`id`, `id_post`, `id_user`, `created_at`, `body`) VALUES
+(1, 3, 3, '2022-09-23 14:25:44', 'comment de test'),
+(2, 3, 2, '2022-09-23 20:47:27', 'adcionando comment'),
+(3, 3, 2, '2022-09-23 20:49:49', 'hate'),
+(4, 3, 2, '2022-09-23 20:51:01', 'adcionando comem'),
+(5, 3, 2, '2022-09-23 20:52:40', 'test');
+
 -- --------------------------------------------------------
 
 --
@@ -54,7 +65,9 @@ CREATE TABLE `postlikes` (
 
 INSERT INTO `postlikes` (`id`, `id_post`, `id_user`, `created_at`) VALUES
 (1, 3, 2, '2022-09-23 11:12:17'),
-(4, 2, 2, '2022-09-23 12:29:46');
+(15, 2, 2, '2022-09-24 13:47:01'),
+(22, 3, 3, '2022-09-24 14:33:54'),
+(24, 2, 3, '2022-09-24 17:16:40');
 
 -- --------------------------------------------------------
 
@@ -77,7 +90,8 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`id`, `id_user`, `type`, `created_at`, `body`) VALUES
 (1, 2, 'text', '2022-09-20 17:54:54', 'sdagvdsafgsdaf'),
 (2, 3, 'text', '2022-09-20 18:09:41', 'testando pedro'),
-(3, 2, 'text', '2022-09-21 18:16:26', 'test');
+(3, 2, 'text', '2022-09-21 18:16:26', 'test'),
+(23, 2, 'photo', '2022-09-25 01:15:38', '7e3963bc74b071aeef393dd2eed99107.jpg');
 
 -- --------------------------------------------------------
 
@@ -96,10 +110,10 @@ CREATE TABLE `userrelations` (
 --
 
 INSERT INTO `userrelations` (`id`, `user_from`, `user_to`) VALUES
-(1, 2, 3),
 (2, 3, 2),
 (3, 6, 2),
-(4, 6, 3);
+(4, 6, 3),
+(7, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -125,8 +139,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `birthdate`, `city`, `work`, `avatar`, `cover`, `token`) VALUES
-(2, 'rodrigoaes.20@hotmail.com', '$2y$10$Or2VO9HXd4oi16l2q2DsmeyMfe84wCoFmBwh5hq8Cz3vN1xrXxyMW', 'Rodrigo Alves do Espirito Santo', '1997-05-15', 'SÃ£o Paulo', 'Desempregado', '32ab5675d7095c904c074a2a135d20f3.jpg', '3dcc031adb4387eaeb6423890e44fafb.jpg', '4dab0df4aced64c603273edae0cbe2c9'),
-(3, 'pedroTest@hotmail.com', '$2y$10$v48iyMxm/F5CJJiPC6cyR.jl55QKvUpv87s8fOAkjEW65jDUtHHu6', 'Pedro Test', '1997-08-01', '', '', 'avatar.jpg', 'cover.jpg', '13e79f2e44b404bb32932a17a44c11be'),
+(2, 'rodrigoaes.20@hotmail.com', '$2y$10$Or2VO9HXd4oi16l2q2DsmeyMfe84wCoFmBwh5hq8Cz3vN1xrXxyMW', 'Rodrigo Alves do Espirito Santo', '1997-05-15', 'SÃ£o Paulo', 'Desempregado', '32ab5675d7095c904c074a2a135d20f3.jpg', '3dcc031adb4387eaeb6423890e44fafb.jpg', '8acd5738cded307ade3c55cabbaae4af'),
+(3, 'pedroTest@hotmail.com', '$2y$10$v48iyMxm/F5CJJiPC6cyR.jl55QKvUpv87s8fOAkjEW65jDUtHHu6', 'Pedro Test', '1997-08-01', '', '', 'avatar.jpg', 'cover.jpg', '213b77df6a16aa21689fb5a726f45a50'),
 (6, 'pauloTest@gmail.com', '$2y$10$0JJDPZfTTS1yHCPM9tjC..R7n0NYrkK5cMbTc6LS7S6dSCIbIJ6a6', 'Paulo test', '1997-08-01', NULL, NULL, 'avatar.jpg', 'cover.jpg', 'ad573e0b30d59c21e46292bae866eff0'),
 (7, 'pe@gmail.com', '$2y$10$5cyBqoCQPf2.2fzSVNWERetoTjdNynpqrKqiwk8xyqzi..9gmbup2', 'Pe', '1997-05-15', NULL, NULL, 'avatar.jpg', 'cover.jpg', 'fd1f81ed64cce9c201c6a959f9d03e64');
 
@@ -172,25 +186,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `postcomments`
 --
 ALTER TABLE `postcomments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `postlikes`
 --
 ALTER TABLE `postlikes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `userrelations`
 --
 ALTER TABLE `userrelations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `users`

@@ -36,6 +36,71 @@
     width:20px;
     height:20px;
 }
+.feed-item-more-window {
+    position:absolute;
+    background-color:#FFF;
+    width:150px;
+    padding:5px;
+    border:1px solid #EEE;
+    border-radius:3px;
+    margin-left: -130px;
+    display:none;
+}
+
+
+.feed-item-more-window button{
+    width: 100%;
+    display:block;
+    padding:7px;
+    border:none;
+    background-color: #FFF;
+    text-decoration: none;
+    color:#000;
+}
+.feed-item-more-window .confirm-delete {
+    left: 500px;
+    top:260px;
+    width:300px;
+    height:150px;
+    border:2px solid #ccc;
+    border-radius: 6px;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+}
+.confirm-delete-form {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:center;
+}
+.confirm-delete p {
+    font-size: 16px;
+    margin:0px 50px;
+}
+.confirm-delete-buttons {
+    display:flex;
+    margin-top: 20px;
+}
+.confirm-delete a,
+.confirm-delete button {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    margin:8px
+}
+
+.feed-item-more-window button:hover {
+    background-color: #EEE;
+}
+
 
 .feed-item-body {
     color:#333;

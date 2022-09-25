@@ -232,13 +232,38 @@ header .head-side {
     display: none;
     color:#333;
 }
-.feed-new-send {
+.feed-new-send,
+.feed-new-photo {
     cursor: pointer;
     margin-right:5px;
 }
-.feed-new-send img {
+.feed-new-send img,
+.feed-new-photo img {
     width:25px;
     height:25px;
+}
+.feed-new-file {
+    position:absolute;
+    left:-500px;
+    top:-500px;
+}
+
+.feed-pagination a {
+    display:inline-block;
+    padding:7px 10px;
+    border:1px solid #ccc;
+    border-radius: 3px;
+    margin: 1px;
+    text-decoration: none;
+    color: #000;
+}
+.feed-pagination a:hover {
+    background-color:#4a76a8;
+    color:#FFF;
+}
+.feed-pagination a.active {
+    background-color:#4a76a8;
+    color:#FFF;
 }
 
 .banners .box-body {
@@ -289,7 +314,10 @@ header .head-side {
 }
 
 .profile-info-item {
-    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .profile-info-item-n {
     font-weight: bold;
@@ -347,15 +375,23 @@ header .head-side {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.photo-container {
+    display: flex;
+    justify-content: flex-end;
+}
 .user-photo-item {
     margin-right:10px;
+    max-width: 25%;
 }
 .user-photo-item:last-child {
     margin-right:0;
 }
 .user-photo-item img {
     max-width: 100%;
+}
+
+.full-user-photos .user-photo-item {
+    max-width:100%;
 }
 
 .tabs {
@@ -389,6 +425,20 @@ header .head-side {
 }
 .full-user-photos .user-photo-item {
     margin:0;
+}
+.button {
+    max-width: 200px;
+    background-color: #4a76a8;
+    text-decoration: none;
+    color:#FFF;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 400;
+    box-shadow: 0px 0px 3px #999;
+}
+.button:hover {
+    background-color:#224b7a
 }
 
 @media (max-width: 992px) {
