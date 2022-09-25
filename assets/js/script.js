@@ -21,7 +21,7 @@ function showTab() {
 }
 
 if(document.querySelector('.tab-item')) {
-    //showTab();
+    showTab();
     document.querySelectorAll('.tab-item').forEach(function(e){
         e.addEventListener('click', function(r) {
             setActiveTab( r.target.getAttribute('data-for') );
